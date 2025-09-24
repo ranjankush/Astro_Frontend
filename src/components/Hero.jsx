@@ -1,5 +1,5 @@
-
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Hero() {
   return (
@@ -26,15 +26,13 @@ export default function Hero() {
         <p className="mt-4 text-lg md:text-2xl">
           Get personalized astrology insights using AI
         </p>
-        <a
-          href="/chat"
+        <Link
+          to="/chat"
           className="mt-6 inline-block bg-purple-700 hover:bg-purple-800 text-white px-6 py-3 rounded-lg transition"
         >
           Chat with AI
-        </a>
+        </Link>
       </div>
     </section>
   );
 }
-
- 
