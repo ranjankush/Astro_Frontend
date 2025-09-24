@@ -15,14 +15,27 @@ export default function Hero() {
   const handleVideoEnd = () => {
     setCurrent((prev) => (prev + 1) % videos.length);
   };
+const preloadedVideos = useRef([]);
 
- useEffect(() => {
-  videos.forEach((src) => {
+useEffect(() => {
+  // Preload videos
+  preloadedVideos.current = videos.map((src) => {
     const video = document.createElement("video");
     video.src = src;
     video.preload = "auto";
+    video.muted = true;
+    video.load();
+    return video;
   });
 }, []);
+
+useEffect(() => {
+  if (videoRef.current && preloadedVideos.current[current]) {
+    videoRef.current.src = preloadedVideos.current[current].src;
+    videoRef.current.play();
+  }
+}, [current]);
+
 
 
 
