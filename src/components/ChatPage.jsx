@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import ChatBox from "../components/ChatBox";
+import { getRashi } from "../api/ApiService";
+
 
 export default function ChatPage() {
   const [userDetails, setUserDetails] = useState(null);
@@ -17,10 +19,24 @@ export default function ChatPage() {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setUserDetails(form);
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   setUserDetails(form);
+  // };
+
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  // fetch rashi here if needed
+  let rashiData = null;
+  try {
+    rashiData = await getRashi(form.name);
+  } catch (err) {
+    console.error("Rashi fetch failed at landing:", err);
+  }
+
+  setUserDetails({ ...form, rashi: rashiData });
+};
+
 
   const handleReset = () => {
     setUserDetails(null);
