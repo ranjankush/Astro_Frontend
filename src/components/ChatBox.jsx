@@ -188,7 +188,7 @@ useEffect(() => {
         {messages.map((msg, i) => (
           <div
             key={i}
-            className={`flex ${msg.from === "user" ? "justify-end" : "justify-start"}`}
+            className={`opacity-80 flex ${msg.from === "user" ? "justify-end" : "justify-start"}`}
           >
             {msg.from === "user" ? (
               <span className="bg-blue-500 text-white px-4 py-2 rounded-lg max-w-[90%] sm:max-w-[70%] md:max-w-[60%] break-words text-sm sm:text-base">
