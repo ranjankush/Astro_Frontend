@@ -18,7 +18,7 @@ export default function ChatPage() {
       [name]: value,
     }));
   };
-
+const [loading, setLoading] = useState(false);
   // const handleSubmit = (e) => {
   //   e.preventDefault();
   //   setUserDetails(form);
@@ -27,6 +27,7 @@ export default function ChatPage() {
   const handleSubmit = async (e) => {
   e.preventDefault();
   // fetch rashi here if needed
+  setLoading(true);
   let rashiData = null;
   try {
     rashiData = await getRashi(form.name);
@@ -35,6 +36,7 @@ export default function ChatPage() {
   }
 
   setUserDetails({ ...form, rashi: rashiData });
+  setLoading(false);
 };
 
 
@@ -85,11 +87,16 @@ export default function ChatPage() {
             className="w-full border p-2 rounded"
             required
           />
-          <button
+         <button
             type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded w-full"
+            disabled={loading}
+            className={`w-full px-4 py-2 rounded transition-colors duration-200
+              ${loading
+                ? "bg-gray-400 cursor-not-allowed text-white"
+                : "bg-blue-500 hover:bg-blue-600 text-white"}
+            `}
           >
-            Start Chat
+            {loading ? "Preparing chat..." : "Start Chat"}
           </button>
         </form>
       ) : (
